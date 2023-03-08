@@ -47,6 +47,8 @@ This repo contains a framework for [Gitlab Runner Custom Executors](https://docs
 
 4. Execute `gitlab-runner install`, `gitlab-runner start`, and finally `gitlab-runner verify`.
 
+---
+
 ### Environment Variables
 
 - ENVs are added under the `[[runners]]` (not `[runners.custom]`) and then under its `environment = [`.
