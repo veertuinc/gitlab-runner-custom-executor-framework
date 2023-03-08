@@ -1,12 +1,12 @@
 # Gitlab Runner Custom Executor Framework
 
-This repo shows how to build a [custom executor for Gitlab Runners](https://docs.gitlab.com/runner/executors/custom.html). Simply clone this repo, and then add the appropriate code to the various scripts where needed.
-
-Before you start:
-
-- All `CUSTOM_ENV_` found will be converted into `ANKA_` versions (without `CUSTOM_ENV_`) in the `config.bash>job_env`. This is so any variables we generate inside `config.bash` can be overwritten in the `config.toml` or `yml` for the job. For devs/TLDR: The only files that should care about `CUSTOM_ENV_` ENVs in are `config.bash` and `shared.bash`; all others use `ANKA_`.
+This repo contains a framework for [Gitlab Runner Custom Executors](https://docs.gitlab.com/runner/executors/custom.html). Clone, fork, or use the Template to create your own. All you need to do is modify occurrences of `ANKA_` with your own unique prefix and then add various changes throughout the various .bash scripts for your executor.
 
 ---
+
+## Before You Begin
+
+- All `CUSTOM_ENV_` found will be converted into `ANKA_` versions (without `CUSTOM_ENV_`) in the `config.bash>job_env`. This is so any variables we generate inside `config.bash` can be overwritten in the `config.toml` or `yml` for the job. For devs/TLDR: The only files that should care about `CUSTOM_ENV_` ENVs in are `config.bash` and `shared.bash`; all others should use `ANKA_`.
 
 ## Environment Variables
 
