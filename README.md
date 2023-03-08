@@ -74,7 +74,7 @@ Allows users to enable debug output for the **job log** showing CUSTOM_ENVs and 
 ```yaml
 test:
   tags:
-    - anka
+    - anka-macos-vm
   . . .
   variables:
     ANKA_ENABLE_JOB_DEBUG_LOGGING: "true"
