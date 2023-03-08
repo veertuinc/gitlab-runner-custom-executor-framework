@@ -1,6 +1,6 @@
 # Gitlab Runner Custom Executor Framework
 
-This repo contains a framework for [Gitlab Runner Custom Executors](https://docs.gitlab.com/runner/executors/custom.html). Clone, fork, or use the Template to create your own. All you need to do is modify occurrences of `ANKA_` with your own unique prefix and then add various changes throughout the various .bash scripts for your executor.
+This repo contains a framework for [Gitlab Runner Custom Executors](https://docs.gitlab.com/runner/executors/custom.html). Clone, fork, or use the Template to create your own. All you need to do is modify occurrences of `ANKA_` with your own unique prefix and then add various changes throughout the various .bash scripts for your executor's logic.
 
 ---
 
