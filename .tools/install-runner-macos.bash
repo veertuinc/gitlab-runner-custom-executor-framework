@@ -23,7 +23,7 @@ if [[ $1 != "--uninstall" ]]; then
 
   # register it
   export SHARED_REGISTRATION_TOKEN="$(docker exec -i anka.gitlab bash -c "gitlab-rails runner -e production \"puts Gitlab::CurrentSettings.current_application_settings.runners_registration_token\"")"
-  export SHARED_RUNNER_TOKEN=$(curl -s --request POST -H "PRIVATE-TOKEN: token-string-here123" "http://anka.gitlab:8093/api/v4/runners" --form "token=${SHARED_REGISTRATION_TOKEN}" --form "description=custom-executor-test" --form "tag_list=anka,custom-executor" | jq -r '.token' )
+  export SHARED_RUNNER_TOKEN=$(curl -s --request POST -H "PRIVATE-TOKEN: token-string-here123" "http://anka.gitlab:8093/api/v4/runners" --form "token=${SHARED_REGISTRATION_TOKEN}" --form "description=custom-executor-test" --form "tag_list=anka-macos-vm" | jq -r '.token' )
 
 cat << EOF > ~/.gitlab-runner/config.toml
 concurrent = 2
@@ -34,8 +34,6 @@ shutdown_timeout = 0
 [session_server]
   session_timeout = 1800
 [[runners]]
-  # anything defined here is applied to any job running through the runner.
-  # There are also configuration values set in the config.sh of the custom executor.
   name = "${SHARED_RUNNER_NAME}"
   url = "http://anka.gitlab:8093/"
   token = "${SHARED_RUNNER_TOKEN}"
