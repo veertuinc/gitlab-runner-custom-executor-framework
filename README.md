@@ -4,10 +4,6 @@ This repo contains a framework for [Gitlab Runner Custom Executors](https://docs
 
 ---
 
-## Before You Begin
-
-- All `CUSTOM_ENV_` found will be converted into `ANKA_` versions (without `CUSTOM_ENV_`) in the `config.bash>job_env`. This is so any variables we generate inside `config.bash` can be overwritten in the `config.toml` or `yml` for the job. For devs/TLDR: The only files that should care about `CUSTOM_ENV_` ENVs in are `config.bash` and `shared.bash`; all others should use `ANKA_`.
-
 ## Setup
 
 1. Obtain a **Registration Token** from your Gitlab instance/admin.
