@@ -16,7 +16,7 @@ trap cleanup ERR
 
 #############################
 # job_env is where we can put ENVs that will be available to all steps in the executor.
-CUSTOM_ENVS="$(env | grep CUSTOM_ENV_ANKA)"
+CUSTOM_ENVS="$(env | grep ^CUSTOM_ENV_ANKA)"
 CUSTOM_ENVS_COUNT="$(echo "${CUSTOM_ENVS}" | wc -l | xargs)"
 CONFIG=$(cat <<EOS
 {
@@ -29,7 +29,7 @@ CONFIG=$(cat <<EOS
     "name": "Anka Gitlab Custom Executor",
     "version": "${CUSTOM_ENV_ANKA_CUSTOM_EXECUTOR_VERSION}"
   },
-  "job_env" : {
+  "job_env": {
     $(for FOUND_ENV in ${CUSTOM_ENVS}; do
       [[ ${CUSTOM_ENVS_COUNT} -gt 1 ]] && COMMA="," || COMMA=
       FOUND_ENV="\"${FOUND_ENV/=/\": \"}\"${COMMA}"
