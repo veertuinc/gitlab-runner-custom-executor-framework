@@ -25,6 +25,7 @@ if [[ $1 != "--uninstall" ]]; then
   export SHARED_REGISTRATION_TOKEN="$(docker exec -i anka.gitlab bash -c "gitlab-rails runner -e production \"puts Gitlab::CurrentSettings.current_application_settings.runners_registration_token\"")"
   export SHARED_RUNNER_TOKEN=$(curl -s --request POST -H "PRIVATE-TOKEN: token-string-here123" "http://anka.gitlab:8093/api/v4/runners" --form "token=${SHARED_REGISTRATION_TOKEN}" --form "description=custom-executor-test" --form "tag_list=anka-macos-vm" | jq -r '.token' )
 
+mkdir -p ~/.gitlab-runner
 cat << EOF > ~/.gitlab-runner/config.toml
 concurrent = 2
 log_level = "debug" # needed for gitlab-runner to log cleanup.bash STDOUT/ERR (not in job logs)
