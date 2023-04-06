@@ -3,8 +3,15 @@ echo "] Cleaning..."
 SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)
 . "${SCRIPT_DIR}/shared.bash"
 set -eo pipefail
-# ensure we only ever retry the specific step, not the whole job (and all steps)
-cleanup () {
-  exit $SYSTEM_FAILURE_EXIT_CODE
-}
-trap cleanup ERR
+# cleanup stage does not retry using $SYSTEM_FAILURE_EXIT_CODE
+RETRIES=3
+while true ; do
+  [[ $RETRIES -gt 0 ]] || (echo "ERROR: cleanup hit max retries" && exit $BUILD_FAILURE_EXIT_CODE)
+  (
+    echo "cleanup logic here"
+  ) &
+  wait $! && break
+  echo "try exit code: ${?}"
+  ((RETRIES=RETRIES-1))
+  sleep 10
+done
