@@ -77,6 +77,14 @@ test:
   . . .
 ```
 
+---
+
+## Development Notes
+
+- To retry the specific step only (like the config, prepare, etc), use `exit $RETRY_STEP_EXIT_CODE`, otherwise if they do not need a retry then use `exit $BUILD_FAILURE_EXIT_CODE` to immediately exit the job.
+- `config.bash` can ONLY have the CONFIG JSON in the STDOUT. All other output must go to STDERR.
+- `CUSTOM_ENV_CI_JOB_URL` is the unique identifier for instances. Until we have server side filtering, we have to inefficiently iterate the entire instance listing to find the proper one post-start.
+
 ## Tests
 
 - Execute `.tools/test.bash`.
