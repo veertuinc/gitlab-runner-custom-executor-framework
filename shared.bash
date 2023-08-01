@@ -5,7 +5,7 @@ PATH="$PATH:/usr/local/bin"
 
 # needed for local testing/running; gitlab makes these available in the runner
 BUILD_FAILURE_EXIT_CODE=${BUILD_FAILURE_EXIT_CODE:-1}
-SYSTEM_FAILURE_EXIT_CODE=${SYSTEM_FAILURE_EXIT_CODE:-2}
+RETRY_STEP_EXIT_CODE=${SYSTEM_FAILURE_EXIT_CODE:-2}
 
 # Set debug output for scripts
 CUSTOM_ENV_ANKA_ENABLE_JOB_DEBUG_LOGGING=${CUSTOM_ENV_ANKA_ENABLE_JOB_DEBUG_LOGGING:-false}
