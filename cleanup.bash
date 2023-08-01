@@ -5,13 +5,10 @@ SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)
 set -eo pipefail
 # cleanup stage does not retry using $SYSTEM_FAILURE_EXIT_CODE
 RETRIES=3
-while true ; do
+while ! (
   [[ $RETRIES -gt 0 ]] || (echo "ERROR: cleanup hit max retries" && exit $BUILD_FAILURE_EXIT_CODE)
-  (
-    echo "cleanup logic here"
-  ) &
-  wait $! && break
-  echo "try exit code: ${?}"
+  echo "cleanup logic here"
+) ; do
   ((RETRIES=RETRIES-1))
-  sleep 10
+  sleep 1
 done
