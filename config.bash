@@ -7,12 +7,11 @@ SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)
 . "${SCRIPT_DIR}/shared.bash"
 CUSTOM_ENV_ANKA_CUSTOM_EXECUTOR_VERSION="$(cat ${SCRIPT_DIR}/VERSION)"
 set -eo pipefail
-
-# ensure we fail the job immediately if this script fails
-cleanup () {
-  exit $BUILD_FAILURE_EXIT_CODE
+# ensure we only ever retry the specific step, not the whole job (and all steps)
+cleanup_config () {
+  [[ $? -eq $RETRY_STEP_EXIT_CODE ]] && exit $RETRY_STEP_EXIT_CODE || exit $BUILD_FAILURE_EXIT_CODE
 }
-trap cleanup ERR
+trap cleanup_config ERR
 
 #############################
 # job_env is where we can put ENVs that will be available to all steps in the executor.
